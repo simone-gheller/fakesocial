@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
+const size_t BUFFER = 2000;
+
 typedef struct Entity
 {
     char* id;
@@ -16,33 +18,58 @@ typedef struct Relationship
 }Relationship;
 
 
-char* cmd_crop(char* string){
+char* cmd_resolve(char* string){
 
-    char* cmd = (char *) malloc(sizeof(char) * 10);
-    strncpy(cmd,"deafult",10);
-    int i=0;
-    while(string[i] != ' ') {
-        i++;
+    char* cmd = strtok(string, " ");
+    printf("%s ",cmd);
+    char* token1 = strtok(NULL, " ");
+    printf("%s ",token1);
+
+    if(strcmp(cmd, "addent")==0){
+        
     }
-    strncpy(cmd, string, i);
-    cmd[i] = 0;
+    else if(strcmp(cmd, "addrel")==0){
+        char* token2 = strtok(NULL, " ");
+        printf("%s ",token2);
+        char* token3 = strtok(NULL, " ");
+        printf("%s ",token3);
+        
+    }
+    else if(strcmp(cmd, "delent")==0){
+        
+    }
+    else if(strcmp(cmd, "delrel")==0){
+        char* token2 = strtok(NULL, " ");
+        printf("%s ",token2);
+        char* token3 = strtok(NULL, " ");
+        printf("%s ",token3);
+        
+    }
+    else if(strcmp(cmd, "report")==0){
+        
+    }
+    else if(strcmp(cmd, "end")==0){
 
-    return cmd;
+    }
+    else{
+        //wrong command format
+    }
+    printf("\n");
 }
 
 
-void cmd_dispatcher(char* cmd) {
+void cmd_reader() {
 
-    char line[] = "default";
-
-    while(scanf("%s",line));
+    char line[BUFFER];
+    while(fgets(line,BUFFER,stdin)!=NULL){
+        line[strlen(line)-2] = 0;
+        cmd_resolve(line);
+    }
 }
 
 
 int main(int argc, char const *argv[])
 {
-    char test[] = "string test charachtaer";
-    char* result = cmd_crop(test);
-    printf("%s\n",result);
+    cmd_reader();
     return 0;
 }
