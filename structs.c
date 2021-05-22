@@ -62,7 +62,7 @@ void cmd_reader() {
 
     char line[BUFFER];
     while(fgets(line,BUFFER,stdin)!=NULL){
-        line[strlen(line)-2] = 0;
+        line[strlen(line)-1] = 0;
         cmd_resolve(line);
     }
 }
