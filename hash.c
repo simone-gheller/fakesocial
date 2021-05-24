@@ -108,6 +108,7 @@ void delete(Hashtable* t, char* del_entity){
     Entity* del = search(t,del_entity);
     if(del!=NULL){
         del->id=-1;
+        //free(del->name);
         del->name=t->DELETED;
 
     }
