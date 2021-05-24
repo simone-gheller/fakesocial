@@ -35,6 +35,7 @@ void dsry_hst(Hashtable* t){
         }
     }
     free(t->entities);
+    free(t->DELETED);
     free(t);
     t = NULL;
 }
@@ -74,10 +75,10 @@ Entity* search(Hashtable* t,char* entity_name){
     int i=0;
     int j=double_hash(entity_name,0);
     while(t->entities[j]!=NULL && i<CAPACITY){
-        j=double_hash(entity_name,i);
         if(strcmp(t->entities[j]->name,entity_name)==0)
             return t->entities[j];
         i++;
+        j=double_hash(entity_name,i);
     }
     return NULL;
 }
@@ -108,6 +109,7 @@ void delete(Hashtable* t, char* del_entity){
     if(del!=NULL){
         del->id=-1;
         del->name=t->DELETED;
+
     }
 }
 
@@ -147,6 +149,7 @@ void test(){
         resolve(t,string);
     }
     hst_print(t);
+    dsry_hst(t);
 }
 
 int main(int argc, char const *argv[])
